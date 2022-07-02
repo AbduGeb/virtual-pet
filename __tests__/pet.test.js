@@ -7,6 +7,35 @@ describe("constructor", () => {
 
     it("sets the name property", () => {
         const pet = new Pet("Fido");
+        const pet2 = new Pet("Rex");
+        
         expect(pet.name).toEqual("Fido");
+        expect(pet2.name).toEqual("Rex");
     });
+
+    it("has an initial age of 0", () => {
+        const pet = new Pet("Fido");
+
+        expect(pet.age).toEqual(0);
+    });
+
+
+});
+
+describe("growUp", () => {
+    it("has a method called growUp", () => {
+        const pet = new Pet("Fido");
+
+        expect(pet.growUp).toBeInstanceOf(Function);
+    });
+    
+    it("increments the age by 1", () => {
+        const pet = new Pet("Fido");
+
+        pet.growUp();
+
+        expect(pet.age).toEqual(1);
+    });
+
+
 });
