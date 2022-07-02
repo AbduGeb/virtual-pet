@@ -97,5 +97,44 @@ describe("feed", () => {
         pet.feed();
 
         expect(pet.hunger).toEqual(2);
-    })
+    });
+});
+
+describe("checkUp", () => {
+    it("returns 'I need a walk' if fitness is 3 or less", () => {
+        const pet = new Pet("Fido");
+
+        pet.fitness = 3;
+
+        expect(pet.checkUp()).toEqual("I need a walk");
+    });
+
+    it("returns 'I am hungry' if hunger is 5 or more", () => {
+        const pet = new Pet("Fido");
+
+        pet.hunger = 5;
+
+        expect(pet.checkUp()).toEqual("I am hungry")
+    });
+
+    it("returns 'I am hungry AND I need a walk' if fitness is 3 or less and hunger is 5 or more", () => {
+        const pet = new Pet("Fido");
+
+        pet.fitness = 3;
+        pet.hunger = 5;
+
+        expect(pet.checkUp()).toEqual("I am hungry AND I need a walk");
+    });
+
+    it("returns 'I feel great!' if fitness is more than 3 and hunger is less than 5", () => {
+        const pet = new Pet("Fido");
+
+        pet.fitness = 4;
+        pet.hunger = 4;
+
+        expect(pet.checkUp()).toEqual("I feel great!");
+    });
+
+
+
 })

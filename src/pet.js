@@ -1,5 +1,10 @@
 const MAXIMUM_FITNESS = 10;
+const MINIMUM_FITNESS = 0;
+const FITNESS_BRKPOINT = 3;
+const MAXIMUM_HUNGER = 10;
 const MINIMUM_HUNGER = 0;
+const HUNGER_BRKPOINT = 5;
+
 
 
 function Pet(name) {
@@ -29,7 +34,19 @@ Pet.prototype.feed = function () {
     } else {
         this.hunger = MINIMUM_HUNGER;
     };
-}
+};
+
+Pet.prototype.checkUp = function () {
+    if (this.fitness <= FITNESS_BRKPOINT && this.hunger >= HUNGER_BRKPOINT) {
+        return "I am hungry AND I need a walk"
+    } else if (this.fitness <= FITNESS_BRKPOINT) {
+        return "I need a walk"
+    } else if (this.hunger >= HUNGER_BRKPOINT) {
+        return "I am hungry"
+    } else {
+        return "I feel great!"
+    }
+};
 
 
 module.exports = Pet;
