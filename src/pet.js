@@ -4,6 +4,8 @@ const FITNESS_BRKPOINT = 3;
 const MAXIMUM_HUNGER = 10;
 const MINIMUM_HUNGER = 0;
 const HUNGER_BRKPOINT = 5;
+const MAXIMUM_AGE = 30;
+
 
 
 
@@ -14,13 +16,27 @@ function Pet(name) {
     this.fitness = 10;
 };
 
+Pet.prototype = {
+    get isAlive() {
+        return this.age < MAXIMUM_AGE && this.hunger < MAXIMUM_HUNGER && this.fitness > MINIMUM_FITNESS;
+    }
+};
+
 Pet.prototype.growUp = function() {
+    if (!this.isAlive) {
+        throw new Error("Your pet is no longer alive :(");
+    }
+    
     this.age += 1;
     this.hunger += 5;
     this.fitness -= 3;
 };
 
 Pet.prototype.walk = function () {
+    if (!this.isAlive) {
+        throw new Error("Your pet is no longer alive :(");
+    }
+
     if ((this.fitness + 4) <= MAXIMUM_FITNESS ) {
     this.fitness += 4;
     } else {
@@ -29,6 +45,10 @@ Pet.prototype.walk = function () {
 };
 
 Pet.prototype.feed = function () {
+    if (!this.isAlive) {
+        throw new Error("Your pet is no longer alive :(");
+    }
+
     if ((this.hunger - 3) >= MINIMUM_HUNGER) {
         this.hunger -= 3;
     } else {
@@ -37,6 +57,10 @@ Pet.prototype.feed = function () {
 };
 
 Pet.prototype.checkUp = function () {
+    if (!this.isAlive) {
+        throw new Error("Your pet is no longer alive :(");
+    };
+
     if (this.fitness <= FITNESS_BRKPOINT && this.hunger >= HUNGER_BRKPOINT) {
         return "I am hungry AND I need a walk"
     } else if (this.fitness <= FITNESS_BRKPOINT) {
